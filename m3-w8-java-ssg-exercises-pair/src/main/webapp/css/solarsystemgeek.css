@@ -206,6 +206,9 @@ section.centeredPanel {
     display: block;
     margin: 0 auto;
 }
+.title-case{
+	text-transform: capitalize;
+}
 
 .success-message {
     background-color: #5CB85C;
