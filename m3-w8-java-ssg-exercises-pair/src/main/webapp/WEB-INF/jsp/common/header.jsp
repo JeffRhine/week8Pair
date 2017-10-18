@@ -6,6 +6,12 @@
     <meta charset="UTF-8">
     <title>Solar System Geek</title>
     <c:url value="/css/solarsystemgeek.css" var="cssHref" />
+    <c:url value="/ageCalculatorInput" var="age" />
+    <c:url value="/weightCalculatorInput" var="weight" />
+    <c:url value="/travelCalculatorInput" var="travel" />
+    <c:url value="/forum" var="forum" />
+    <c:url value="/shoppingCart/index" var="spaceStore" />
+    
     <link rel="stylesheet" href="${cssHref}">
 </head>
 
@@ -23,9 +29,10 @@
         <h2>Explore The Solar System</h2>
         <p> Use these state of the art web applications to learn more about the solar system! </p>
         <ul>
-            <li><a href="ageCalculatorInput">Alien Age</a></li>
-            <li><a href="weightCalculatorInput">Alien Weight</a></li>
-            <li><a href="travelCalculatorInput">Drive Time</a></li>    
-            <li><a href="forum">Forum</a></li>             
+            <li><a href="${age}">Alien Age</a></li>
+            <li><a href="${weight}">Alien Weight</a></li>
+            <li><a href="${travel}">Drive Time</a></li>    
+            <li><a href="${forum}">Forum</a></li> 
+            <li><a href="${spaceStore}">Space Store</a></li>            
         </ul>
     </nav>

@@ -218,3 +218,18 @@ section.centeredPanel {
     padding: 10px;
     margin-bottom: 10px;
 }
+
+img.products {
+    width: 10%;
+    border-color: #FFFFFF;
+    border-width: 8px;
+    border-style: solid;
+}
+
+.price {
+	color: red;
+}
+
+.post-container > div nth-child(even) {
+	background-color: red;
+}

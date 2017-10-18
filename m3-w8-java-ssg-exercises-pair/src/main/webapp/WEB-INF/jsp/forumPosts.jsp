@@ -5,13 +5,17 @@
 
 <section class="centeredPanel">
 <h2> Forum</h2>
-<ul>
+
+<div class="post-container">
 <c:forEach items="${allPosts }" var="post">
-	<li><c:out value="${post.username }"/></li>
-	<li><c:out value="${post.subject }"/></li>
-	<li><c:out value="${post.message }"/></li>
+	<div class="post">
+		<h4>User: </h4><c:out value="${post.username }"/>
+		<h4>Subject: </h4><c:out value="${post.subject }"/> at <c:out value="${post.datePosted}"/>
+		<h4>Message: </h4><c:out value="${post.message }"/>
+	</div>
 </c:forEach>
-</ul>
+</div>
+
 <c:url var="makePost" value="forumInput"/>
 <a href="${makePost}">Post</a>
 </section>
