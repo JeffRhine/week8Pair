@@ -13,13 +13,12 @@
 		<br><br>
 		<c:out value="${product.description}"/>
 		
-		<c:url var="formAction" value="/???" />
-	<form method="POST" action="${formAction}">
-		<div class="formInputGroup">
+		<c:url var="addToCartUrl" value="/shoppingCart/addToCart" />
+	<form method="POST" action="${addToCartUrl}">
+	<input type="hidden" name="productId" value="${product.id}"/>
 		<label for="quantity">Quantity to purchase: </label> 
-		<input type="number" name="quantity" id="quantity" />
-		</div>
-		<input type="hidden" name="id" value="${product.id}"/>
+		<input type="number" name="quantity" id="quantity" min="1" />
+	
 		<input class="formSubmitButton" type="submit" value="Add to Cart" />
 	</form>
 

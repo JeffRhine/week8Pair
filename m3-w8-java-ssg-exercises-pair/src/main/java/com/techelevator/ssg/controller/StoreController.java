@@ -1,6 +1,8 @@
 package com.techelevator.ssg.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -16,6 +18,7 @@ import com.techelevator.ssg.model.forum.ForumDao;
 import com.techelevator.ssg.model.forum.ForumPost;
 import com.techelevator.ssg.model.store.Product;
 import com.techelevator.ssg.model.store.ProductDao;
+import com.techelevator.ssg.model.store.ShoppingCart;
 
 @Controller
 @RequestMapping("/shoppingCart")
@@ -44,16 +47,29 @@ public class StoreController {
 		}
 		return "shoppingCart/detail";
 	}
-}	
-//	@RequestMapping(path={"/detail"}, method=RequestMethod.POST) 
-//	public String addToCart(HttpSession session, @RequestParam Long id, @RequestParam int quantity) {
-////		for(Product p : productDao.getAllProducts()) {
-////			if(p.getId().equals(id)) {
-////				modelHolder.put("product", p);
-////			}
-//		
-//			sc.put(productDao.getId(), )
-//			session.setAttribute("id", id);
-//		}
-//		return "shoppingCart/detail";
-//}
+	
+	@RequestMapping(path={"/addToCart"}, method=RequestMethod.POST) 
+	public String addProductToCart(HttpSession session, @RequestParam Long productId, @RequestParam Integer quantity) {
+		if(session.getAttribute("shoppingCart") == null){
+			session.setAttribute("shoppingCart", new ShoppingCart());
+		}
+		ShoppingCart sc = (ShoppingCart) session.getAttribute("shoppingCart");
+		sc.addProduct(productId, quantity);
+		
+		return "redirect:/shoppingCart/view";
+	}	
+	@RequestMapping(path={"/view"}, method=RequestMethod.GET)
+	public String showShoppingCart(HttpSession session, ModelMap modelHolder){
+		Map<Product,Integer> productList = new HashMap<>();
+		ShoppingCart sc= (ShoppingCart) session.getAttribute("shoppingCart");
+		if(sc != null){
+			Map<Long,Integer> shoppingCartProducts = sc.getAllProducts();
+			for(Long productId : shoppingCartProducts.keySet()){
+				Product currentProduct = productDao.getProductById(productId);
+				productList.put(currentProduct, shoppingCartProducts.get(productId));
+			}
+		}
+		modelHolder.put("productList", productList);
+		return "shoppingCart/view";
+	}
+}
